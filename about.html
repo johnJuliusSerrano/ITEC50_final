@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ABOUT</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(to bottom, #473b28, black);
+		}
+
+		#navbar {
+			height: 80px;
+			width: 100%;
+			background-color: #1e3932;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 50px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+
+		#navbar a {
+			color: white;
+			text-decoration: none;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 10px 20px;
+			border-radius: 10px;
+			transition: background-color 0.3s, font-size 0.3s;
+		}
+
+		#navbar a:hover {
+			background-color: #29473c;
+			font-size: 20px;
+		}
+
+		#home {
+			margin-top: 80px;
+			background: linear-gradient(to bottom, #1e3932, black);
+			color: white;
+		}
+
+		.image-box {
+			position: relative;
+			width: 100%;
+			height: 550px;
+			overflow: hidden;
+		}
+
+		.image-box img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			filter: blur(5px) saturate(60%) brightness(60%);
+		}
+
+		.overlay-text {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+			font-size: 42px;
+			font-weight: bold;
+			text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+			text-align: center;
+		}
+
+		.section {
+			padding: 60px 30px;
+			color: white;
+		}
+
+		.section h2 {
+			text-align: center;
+			margin-bottom: 40px;
+			color: white;
+		}
+
+		.card-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 30px;
+			max-width: 1200px;
+			margin: auto;
+		}
+
+		.card {
+			background-color: #1e3932;
+			padding: 20px;
+			border-radius: 12px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			text-align: center;
+		}
+
+		.card img {
+			width: 100%;
+			height: 180px;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+
+		.card p {
+			margin-top: 15px;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div id="navbar">
+		<a href="index.html">HOME</a>
+		<a href="menu.html">MENU</a>
+		<a href="#">ABOUT</a>
+		<a href="contact.html">CONTACT</a>
+	</div>
+
+	<div id="home">
+		<div class="image-box">
+			<img src="img1.jpg" alt="About Image">
+			<div class="overlay-text">WELCOME TO THE ART BREW COFFEE SHOP</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<h2>Our Story</h2>
+		<div class="card-grid">
+			<div class="card">
+				<img src="img2.jpg" alt="Story 1">
+				<p>We started with a dream to brew more than just coffee-it's about experience and warmth.</p>
+			</div>
+			<div class="card">
+				<img src="img3.jpg" alt="Story 2">
+				<p>Inspired by art and local flavors, our drinks reflect culture, comfort, and community.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="section" >
+		<h2>Best Selling</h2>
+		<div class="card-grid">
+			<div class="card">
+				<img src="best1.jpg" alt="Coffee">
+				<p>Signature Iced Mocha</p>
+			</div>
+			<div class="card">
+				<img src="best2.jpg" alt="Coffee">
+				<p>Cold Brew Cream Delight</p>
+			</div>
+			<div class="card">
+				<img src="best3.jpg" alt="Coffee">
+				<p>Classic Hot Americano</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<h2>Customer Feedback</h2>
+		<div class="card-grid">
+			<div class="card">
+				<p>"The best cozy spot for rainy days!"</p>
+				<p> - Julius </p>
+			</div>
+			<div class="card">
+				<p>"Baristas are friendly and the coffee is world-class!"</p>
+				<p> - Tanya </p>
+			</div>
+			<div class="card">
+				<p>"Love the design, vibe, and rich aroma!"</p>
+				<p> - user1231913 </p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HOMEPAGE</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;		
+		}
+
+		#navbar {
+			height: 80px;
+			width: 100%;
+			background-color: #1e3932;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 50px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+
+		#navbar a {
+			color: white;
+			text-decoration: none;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 10px 20px;
+			transition: background-color 0.3s, color 0.3s;
+			border-radius: 10px;
+			transition: font-size 0.3s;
+		}
+
+		#navbar a:hover {
+			background-color: #29473c;
+			font-size: 20px;
+		}
+
+		#home {
+			height: 800px;
+			width: 100%;
+			background: linear-gradient(to bottom, #473b28, black);
+			color: white;
+			font-size: 32px;
+			position: relative;
+			padding-top: 100px; 
+		}
+
+		#text {
+			height: 600px;
+			width: 40%;
+			text-align: center;
+			top: 80px;
+			left: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			font-size: 24px;
+			padding-left: 5%;
+			padding-right:5%;
+			gap: 30px;
+		}
+
+		#text p {
+			margin: 0;
+			font-weight: bold;
+			font-size: 28px;
+		}
+
+		#text p:nth-child(1) {
+			font-size: 64px;
+		}
+
+		#text p:nth-child(2) {
+			font-size: 16px;
+		}
+
+		#text a {
+			display: inline-block;
+			margin: 0 10px;
+			padding: 12px 24px;
+			background-color: white;
+			color: black;
+			text-decoration: none;
+			font-weight: bold;
+			border-radius: 8px;
+			transition: padding 0.3s;
+		}
+
+		#text a:hover {
+			padding: 14px 26px;
+			background-color: #1e3932;
+			color: white;
+		}
+
+		#logo {
+			height: 600px;
+			width: 50%;
+			position: absolute;
+			top: 80px;
+			left: 45%;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="navbar">
+		<a href="#">HOME</a>
+		<a href="menu.html">MENU</a>
+		<a href="about.html">ABOUT</a>
+		<a href="contact.html">CONTACT</a>
+	</div>
+
+	<div id="home">
+		<div id="text">
+			<p>DISCOVER THE ART OF PERFECT COFFEE</p>	
+			<p> Experience the rich and bold flavors fo our exquisite Coffee Blends, Crafted To Awaken your senses and start your day right. </p>
+			<div>
+				<a href="menu.html">Order Now</a>
+				<a href="about.html">Explore More</a>
+			</div>
+		</div>
+
+		<div id="logo">
+			<img src="webPic1.png">
+		</div>
+	</div>
+</body>
+</html>
+
