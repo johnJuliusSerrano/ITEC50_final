@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Coffee | Premium Coffee Experience</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-dark: #1e3932;
+            --primary-medium: #29473c;
+            --primary-light: #3d6b5a;
+            --accent-gold: #c4a77d;
+            --accent-cream: #e6d5b8;
+            --accent-brown: #473b28;
+            --light-bg: #f9f6f0;
+            --text-dark: #1a1208;
+            --text-light: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        #navbar {
+            height: 80px;
+            width: 100%;
+            background-color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--accent-gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        #navbar a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        #navbar a:hover {
+            color: var(--accent-gold);
+        }
+        
+        #navbar a.active {
+            color: var(--accent-gold);
+        }
+        
+        #navbar a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(to bottom right, var(--accent-brown), var(--text-dark));
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 50%;
+            max-width: 650px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content h1 span {
+            color: var(--accent-gold);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+            font-weight: 300;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(196, 167, 125, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: #d8b782;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(196, 167, 125, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(196, 167, 125, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            max-width: 500px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(-50%) translateY(0px); }
+            50% { transform: translateY(-50%) translateY(-15px); }
+            100% { transform: translateY(-50%) translateY(0px); }
+        }
+        
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Coffee Bean Decoration */
+        .coffee-bean {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: var(--accent-brown);
+            border-radius: 50%;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        .bean-1 { top: 15%; left: 10%; }
+        .bean-2 { top: 25%; right: 12%; }
+        .bean-3 { bottom: 20%; left: 8%; }
+        .bean-4 { bottom: 30%; right: 15%; }
+        
+        /* Featured Products */
+        #featured {
+            padding: 80px 5%;
+            text-align: center;
+            background: var(--light-bg);
+        }
+        
+        .section-header {
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--primary-medium);
+            max-width: 600px;
+            margin: 25px auto 0;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            z-index: 2;
+        }
+        
+        .product-info {
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .product-desc {
+            color: var(--primary-medium);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-price {
+            font-size: 1.6rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        
+        /* Testimonials */
+        #testimonials {
+            padding: 80px 5%;
+            background: linear-gradient(to bottom, var(--primary-medium), var(--primary-dark));
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(196, 167, 125, 0.2);
+            transition: all 0.4s ease;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .testimonial .rating {
+            color: var(--accent-gold);
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .customer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 18px;
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .customer-info h4 {
+            font-size: 17px;
+            margin-bottom: 3px;
+        }
+        
+        .customer-info p {
+            font-style: normal;
+            font-size: 13px;
+            color: var(--accent-cream);
+        }
+        
+        /* Footer */
+        #footer {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--accent-gold);
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        .footer-col p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--accent-cream);
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent-cream);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .quick-links {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+        
+        .quick-links a {
+            color: var(--accent-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .quick-links a:hover {
+            color: var(--accent-gold);
+            transform: translateX(3px);
+        }
+        
+        .quick-links i {
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .member {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero-content {
+                width: 100%;
+                text-align: center;
+                padding: 30px 0;
+            }
+            
+            .hero-content p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                width: 80%;
+                max-width: 400px;
+                margin: 30px auto 0;
+                animation: float-mobile 6s ease-in-out infinite;
+            }
+            
+            @keyframes float-mobile {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            #navbar {
+                padding: 0 15px;
+                height: 70px;
+            }
+            
+            .nav-links {
+                gap: 8px;
+            }
+            
+            #navbar a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+            }
+            
+            .products {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">
+            <div class="logo-icon">AC</div>
+            <div class="logo-text">Artisan<span>Coffee</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">HOME</a>
+            <a href="menu.html">MENU</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <!-- Coffee bean decorations -->
+        <div class="coffee-bean bean-1"></div>
+        <div class="coffee-bean bean-2"></div>
+        <div class="coffee-bean bean-3"></div>
+        <div class="coffee-bean bean-4"></div>
+        
+        <div class="hero-content">
+            <h1>DISCOVER THE <span>ART</span> OF PERFECT COFFEE</h1>
+            <p>Experience the rich and bold flavors of our exquisite coffee blends, crafted to awaken your senses and start your day right.</p>
+            <div class="cta-buttons">
+                <a href="menu.html" class="btn btn-primary">Order Now</a>
+                <a href="about.html" class="btn btn-secondary">Explore More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="mocha.jpg" alt="Premium Coffee">
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured">
+        <div class="section-header">
+            <h2>OUR SIGNATURE BLENDS</h2>
+            <p>Handcrafted with premium ingredients and perfected by our master baristas</p>
+        </div>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="mocha.jpg" alt="Coffee Mocha">
+                    <div class="product-tag">BEST SELLER</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Coffee Mocha</h3>
+                    <p class="product-desc">Smooth medium roast with notes of caramel and hazelnut, topped with whipped cream.</p>
+                    <div class="product-footer">
+                        <div class="product-price">₱185</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="iced.jpg" alt="Iced Coffee">
+                    <div class="product-tag">NEW</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Iced Coffee</h3>
+                    <p class="product-desc">Sweet and caffeinated brew that cools your body, served with ice cubes.</p>
+                    <div class="product-footer">
+                        <div class="product-price">₱195</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="straw.jpg" alt="Strawberry Frappe">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Strawberry Frappe</h3>
+                    <p class="product-desc">Fruity blend with hints of strawberry and citrus, blended to perfection.</p>
+                    <div class="product-footer">
+                        <div class="product-price">₱210</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="section-header">
+            <h2 style="color: white;">WHAT OUR CUSTOMERS SAY</h2>
+            <p>Join our community of satisfied coffee lovers</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <p>"The Coffee Mocha is absolutely divine! Perfect balance of coffee and chocolate. This is now my go-to place for my morning brew."</p>
+                <div class="customer">
+                    <div class="customer-avatar">MS</div>
+                    <div class="customer-info">
+                        <h4>Maria Santos</h4>
+                        <p>Regular Customer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="rating">
+                    ★★★★☆
+                </div>
+                <p>"Iced Coffee on a hot day is pure bliss! The flavor is rich and refreshing. The atmosphere here is also perfect for working."</p>
+                <div class="customer">
+                    <div class="customer-avatar">JR</div>
+                    <div class="customer-info">
+                        <h4>James Rodriguez</h4>
+                        <p>Coffee Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="rating">
+                    ★★★★★
+                </div>
+                <p>"Strawberry Frappe is my absolute favorite! The blend of coffee and fruit is incredible. Staff is always friendly and welcoming."</p>
+                <div class="customer">
+                    <div class="customer-avatar">SJ</div>
+                    <div class="customer-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Coffee Lover</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Artisan Coffee</h3>
+                <p>We are passionate about serving the finest coffee experience. Our beans are ethically sourced and expertly roasted to perfection.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">fb</a>
+                    <a href="#" class="social-link">ig</a>
+                    <a href="#" class="social-link">tw</a>
+                    <a href="#" class="social-link">tk</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="quick-links">
+                    <li><a href="#"><i class="icon">›</i> Home</a></li>
+                    <li><a href="menu.html"><i class="icon">›</i> Menu</a></li>
+                    <li><a href="about.html"><i class="icon">›</i> About Us</a></li>
+                    <li><a href="contact.html"><i class="icon">›</i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <p><i class="icon">📍</i> 123 Brew Street, Manila, PH</p>
+                <p><i class="icon">📞</i> (02) 1234-5678</p>
+                <p><i class="icon">✉️</i> info@artisancoffee.com</p>
+                <p><i class="icon">🕒</i> Mon-Sun: 7AM - 10PM</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Development Team</h3>
+                <div class="team-members">
+                    <div class="member">Serrano, John Julius B.</div>
+                    <div class="member">Puliran, Juvylyn</div>
+                    <div class="member">Beltran, Gerard Dustin</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 BSCS-1A. All rights reserved. | Artisan Coffee
+        </div>
+    </footer>
+</body>
+</html>

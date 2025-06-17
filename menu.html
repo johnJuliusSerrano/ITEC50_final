@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Coffee - Menu</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-dark: #1e3932;
+            --primary-medium: #29473c;
+            --primary-light: #3d6b5a;
+            --accent-gold: #c4a77d;
+            --accent-cream: #e6d5b8;
+            --accent-brown: #473b28;
+            --light-bg: #f9f6f0;
+            --text-dark: #1a1208;
+            --text-light: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation - Matches Homepage */
+        #navbar {
+            height: 80px;
+            width: 100%;
+            background-color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--accent-gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        #navbar a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        #navbar a:hover {
+            color: var(--accent-gold);
+        }
+        
+        #navbar a.active {
+            color: var(--accent-gold);
+        }
+        
+        #navbar a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        /* Menu Header */
+        .menu-header {
+            height: 300px;
+            background: linear-gradient(to bottom, var(--accent-brown), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-title {
+            font-size: 4rem;
+            color: var(--text-light);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-title span {
+            color: var(--accent-gold);
+        }
+        
+        .menu-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-cream);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+        
+        .coffee-bean {
+            position: absolute;
+            width: 40px;
+            height: 25px;
+            background: var(--accent-brown);
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .bean-1 { top: 20%; left: 10%; }
+        .bean-2 { top: 40%; right: 15%; }
+        .bean-3 { bottom: 30%; left: 8%; }
+        .bean-4 { bottom: 20%; right: 12%; }
+        
+        /* Menu Categories */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px auto;
+            max-width: 1000px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+        
+        /* Menu Section */
+        .menu-section {
+            padding: 50px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gold);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            display: flex;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .item-image {
+            width: 40%;
+            background: var(--accent-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .item-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        
+        .item-info {
+            width: 60%;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .item-name {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        
+        .item-price {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        
+        .item-desc {
+            color: var(--primary-medium);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .item-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .item-tag {
+            background: var(--light-bg);
+            color: var(--primary-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        #footer {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 5% 30px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--accent-gold);
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        .footer-col p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--accent-cream);
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent-cream);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .quick-links {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+        
+        .quick-links a {
+            color: var(--accent-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .quick-links a:hover {
+            color: var(--accent-gold);
+            transform: translateX(3px);
+        }
+        
+        .quick-links i {
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .member {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .menu-header {
+                height: 250px;
+                padding-top: 100px;
+            }
+            
+            .menu-title {
+                font-size: 3rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+            }
+            
+            .item-image {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .item-info {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            #navbar {
+                padding: 0 15px;
+                height: 70px;
+            }
+            
+            .nav-links {
+                gap: 8px;
+            }
+            
+            #navbar a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .menu-header {
+                height: 200px;
+                padding-top: 80px;
+            }
+            
+            .menu-title {
+                font-size: 2.2rem;
+            }
+            
+            .menu-subtitle {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .category-btn {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Same as Homepage -->
+    <nav id="navbar">
+        <div class="logo">
+            <div class="logo-icon">AC</div>
+            <div class="logo-text">Artisan<span>Coffee</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="menu.html" class="active">MENU</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Menu Header -->
+    <div class="menu-header">
+        <div class="coffee-bean bean-1"></div>
+        <div class="coffee-bean bean-2"></div>
+        <div class="coffee-bean bean-3"></div>
+        <div class="coffee-bean bean-4"></div>
+        
+        <div>
+            <h1 class="menu-title">Our <span>Menu</span></h1>
+            <p class="menu-subtitle">Discover our handcrafted beverages made with premium ingredients and passion</p>
+        </div>
+    </div>
+
+    <!-- Menu Categories -->
+    <div class="menu-categories">
+        <button class="category-btn active">Coffee</button>
+        <button class="category-btn">Tea</button>
+        <button class="category-btn">Pastries</button>
+        <button class="category-btn">Desserts</button>
+        <button class="category-btn">Seasonal</button>
+    </div>
+
+    <!-- Coffee Menu -->
+    <section class="menu-section">
+        <h2 class="section-title">Coffee Selection</h2>
+        
+        <div class="menu-items">
+            <!-- Coffee Mocha -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="mocha.jpg" alt="Coffee Mocha">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Coffee Mocha</h3>
+                            <div class="item-price">₱185</div>
+                        </div>
+                        <p class="item-desc">Rich espresso blended with chocolate and steamed milk, topped with whipped cream.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Espresso</span>
+                            <span class="item-tag">Best Seller</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Iced Coffee -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="iced.jpg" alt="Iced Coffee">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Iced Coffee</h3>
+                            <div class="item-price">₱195</div>
+                        </div>
+                        <p class="item-desc">Chilled coffee brewed to perfection, served over ice with your choice of milk.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Cold Brew</span>
+                            <span class="item-tag">Refreshing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strawberry Frappe -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="straw.jpg" alt="Strawberry Frappe">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Strawberry Frappe</h3>
+                            <div class="item-price">₱210</div>
+                        </div>
+                        <p class="item-desc">Creamy blend of strawberries, milk, and coffee topped with whipped cream.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Fruity</span>
+                            <span class="item-tag">New</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cappuccino -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="best3.jpg" alt="Cappuccino">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Cappuccino</h3>
+                            <div class="item-price">₱175</div>
+                        </div>
+                        <p class="item-desc">Classic espresso with steamed milk and a thick layer of milk foam.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Espresso</span>
+                            <span class="item-tag">Traditional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Caramel Macchiato -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="caramel.jpg" alt="Caramel Macchiato">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Caramel Macchiato</h3>
+                            <div class="item-price">₱190</div>
+                        </div>
+                        <p class="item-desc">Espresso with vanilla-flavored syrup, milk and caramel sauce.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Sweet</span>
+                            <span class="item-tag">Popular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cold Brew -->
+            <div class="menu-item">
+                <div class="item-image">
+                    <img src="coldbrew.jpg" alt="Cold Brew">
+                </div>
+                <div class="item-info">
+                    <div>
+                        <div class="item-header">
+                            <h3 class="item-name">Cold Brew</h3>
+                            <div class="item-price">₱165</div>
+                        </div>
+                        <p class="item-desc">Smooth cold brew coffee steeped for 24 hours for maximum flavor.</p>
+                        <div class="item-tags">
+                            <span class="item-tag">Strong</span>
+                            <span class="item-tag">Refreshing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Same as Homepage -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Artisan Coffee</h3>
+                <p>We are passionate about serving the finest coffee experience. Our beans are ethically sourced and expertly roasted to perfection.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">fb</a>
+                    <a href="#" class="social-link">ig</a>
+                    <a href="#" class="social-link">tw</a>
+                    <a href="#" class="social-link">tk</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="quick-links">
+                    <li><a href="index.html"><i class="icon">›</i> Home</a></li>
+                    <li><a href="menu.html"><i class="icon">›</i> Menu</a></li>
+                    <li><a href="about.html"><i class="icon">›</i> About Us</a></li>
+                    <li><a href="contact.html"><i class="icon">›</i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <p><i class="icon">📍</i> 123 Brew Street, Manila, PH</p>
+                <p><i class="icon">📞</i> (02) 1234-5678</p>
+                <p><i class="icon">✉️</i> info@artisancoffee.com</p>
+                <p><i class="icon">🕒</i> Mon-Sun: 7AM - 10PM</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Development Team</h3>
+                <div class="team-members">
+                    <div class="member">Serrano, John Julius B.</div>
+                    <div class="member">Puliran, Juvylyn</div>
+                    <div class="member">Beltran, Gerard Dustin</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 BSCS-1A. All rights reserved. | Artisan Coffee
+        </div>
+    </footer>
+</body>
+</html>

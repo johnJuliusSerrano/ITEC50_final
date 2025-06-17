@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Art Brew Coffee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1a1208, #2c2419);
+            color: #e6d5b8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #navbar {
+            height: 80px;
+            width: 100%;
+            background-color: rgba(30, 57, 50, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #c4a77d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3932;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: #c4a77d;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        #navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: all 0.3s;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #navbar a:hover {
+            color: #c4a77d;
+        }
+
+        #navbar a.active {
+            color: #c4a77d;
+        }
+
+        #navbar a.active::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 2px;
+            background: #c4a77d;
+            border-radius: 2px;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 140px 20px 60px;
+            background: linear-gradient(rgba(30, 57, 50, 0.7), rgba(26, 18, 8, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231e3932"/><path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="%23c4a77d" stroke-width="1"/></svg>');
+            background-size: cover;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #e6d5b8;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .contact-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(30, 57, 50, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 167, 125, 0.3);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #c4a77d;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #c4a77d;
+            border-radius: 2px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(41, 71, 60, 0.4);
+            transition: background 0.3s;
+        }
+
+        .info-item:hover {
+            background: rgba(41, 71, 60, 0.7);
+        }
+
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            background: #c4a77d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .icon-container i {
+            font-size: 20px;
+            color: #1e3932;
+        }
+
+        .info-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #e6d5b8;
+        }
+
+        .info-content p {
+            font-size: 1.1rem;
+            color: rgba(230, 213, 184, 0.9);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(196, 167, 125, 0.2);
+            border-radius: 50%;
+            color: #c4a77d;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(196, 167, 125, 0.3);
+        }
+
+        .social-links a:hover {
+            background: #c4a77d;
+            color: #1e3932;
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(30, 57, 50, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 167, 125, 0.3);
+        }
+
+        .contact-form h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #c4a77d;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-form h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #c4a77d;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e6d5b8;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(41, 71, 60, 0.5);
+            color: #e6d5b8;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(196, 167, 125, 0.2);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(41, 71, 60, 0.8);
+            border-color: #c4a77d;
+            box-shadow: 0 0 10px rgba(196, 167, 125, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #c4a77d, #b08e5f);
+            color: #1e3932;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(196, 167, 125, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(to right, #b08e5f, #9c7d4f);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(196, 167, 125, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        .map-container {
+            width: 100%;
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .map-container h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #c4a77d;
+        }
+
+        .map-wrapper {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(196, 167, 125, 0.3);
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231e3932"/><path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="%23c4a77d" stroke-width="1"/></svg>');
+            background-size: cover;
+            position: relative;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 57, 50, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e6d5b8;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Footer Styles */
+        #footer {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 5% 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--accent-gold);
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        .footer-col p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--accent-cream);
+            font-size: 0.95rem;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent-cream);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .footer-social-link:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .quick-links {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+        
+        .quick-links a {
+            color: var(--accent-cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .quick-links a:hover {
+            color: var(--accent-gold);
+            transform: translateX(3px);
+        }
+        
+        .quick-links i {
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .member {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        /* Animation for form elements */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-info, .contact-form, .map-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #navbar {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            #navbar a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100%;
+            }
+            
+            .map-wrapper {
+                height: 300px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 25px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .icon-container {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">
+            <div class="logo-icon">AC</div>
+            <div class="logo-text">Artisan<span>Coffee</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="menu.html">MENU</a>
+            <a href="about.html">ABOUT</a>
+            <a href="#" class="active">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>GET IN TOUCH</h1>
+        <p>We'd love to hear from you! Whether you have a question about our coffee, want to host an event, or just want to say hello, our team is ready to assist you.</p>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            
+            <div class="info-item">
+                <div class="icon-container">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Email</h3>
+                    <p>artbrewcoffee@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-container">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Phone</h3>
+                    <p>0917-123-4567</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-container">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Visit Us</h3>
+                    <p>123 Brew Street, Coffee District<br>Manila, Philippines 1000</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-container">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Opening Hours</h3>
+                    <p>Monday - Friday: 7:00 AM - 10:00 PM<br>Saturday - Sunday: 8:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 30px; color: #c4a77d;">Connect With Us</h3>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="What is this regarding?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="How can we help you?" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="map-container">
+        <h2>Our Location</h2>
+        <div class="map-wrapper">
+            <div class="map-overlay">
+                <div>
+                    <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: #c4a77d; margin-bottom: 20px;"></i>
+                    <p>123 Brew Street, Coffee District<br>Manila, Philippines 1000</p>
+                    <p style="margin-top: 20px; font-size: 1.2rem;">Open in Google Maps</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Art Brew Coffee</h3>
+                <p>We are passionate about serving the finest coffee experience. Our beans are ethically sourced and expertly roasted to perfection.</p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link">fb</a>
+                    <a href="#" class="footer-social-link">ig</a>
+                    <a href="#" class="footer-social-link">tw</a>
+                    <a href="#" class="footer-social-link">tk</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="quick-links">
+                    <li><a href="index.html"><i class="icon">›</i> Home</a></li>
+                    <li><a href="menu.html"><i class="icon">›</i> Menu</a></li>
+                    <li><a href="about.html"><i class="icon">›</i> About Us</a></li>
+                    <li><a href="#"><i class="icon">›</i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <p><i class="icon">📍</i> 123 Brew Street, Manila, PH</p>
+                <p><i class="icon">📞</i> (02) 1234-5678</p>
+                <p><i class="icon">✉️</i> info@artbrewcoffee.com</p>
+                <p><i class="icon">🕒</i> Mon-Sun: 7AM - 10PM</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Development Team</h3>
+                <div class="team-members">
+                    <div class="member">Serrano, John Julius B.</div>
+                    <div class="member">Puliran, Juvylyn</div>
+                    <div class="member">Beltran, Gerard Dustin</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 BSCS-1A. All rights reserved. | Art Brew Coffee
+        </div>
+    </footer>
+    
+    <script>
+        // Form submission effect
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show sending state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate sending
+            setTimeout(() => {
+                // Show success state
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                submitBtn.style.background = 'linear-gradient(to right, #4CAF50, #2E7D32)';
+                
+                // Reset form after 2 seconds
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = 'linear-gradient(to right, #c4a77d, #b08e5f)';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+        
+        // Animation for elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.contact-info, .contact-form, .map-container').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
